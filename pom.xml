@@ -26,7 +26,7 @@
 		<guava.version>19.0</guava.version>
 		<commons.version>3.2.1</commons.version>
 		<swagger.version>2.2.2</swagger.version>
-        <xxl-job-core.version>1.8.0-SNAPSHOT</xxl-job-core.version>
+        <xxl-job-core.version>1.7.2</xxl-job-core.version>
 		<jetty-version>9.4.5.v20170502</jetty-version>
 		<!-- ++++++++++++++++++++++++++ -->
 		<druid.version>1.1.0</druid.version>
@@ -44,9 +44,9 @@
 		<targetXMLPackage>mapper</targetXMLPackage>
 		<!-- 数据库设置 -->
 		<jdbc.driverClass>com.mysql.jdbc.Driver</jdbc.driverClass>
-		<jdbc.url>jdbc:mysql://192.168.36.10:3306/jc_apply?characterEncoding=UTF8</jdbc.url>
-		<jdbc.user>jc_test</jdbc.user>
-		<jdbc.password>jc123456!</jdbc.password>
+		<jdbc.url>jdbc:mysql://127.0.0.1:3306/jc_apply?characterEncoding=UTF8</jdbc.url>
+		<jdbc.user>root</jdbc.user>
+		<jdbc.password>root</jdbc.password>
 		<mapper.plugin>tk.mybatis.mapper.generator.MapperPlugin</mapper.plugin>
 		<mapper.Mapper>com.jc.util.mybatis.MyMapper</mapper.Mapper>
 		<!-- ++++++++++++++++++++++++++ -->

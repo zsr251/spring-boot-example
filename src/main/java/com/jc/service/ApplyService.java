@@ -20,11 +20,11 @@ public interface ApplyService {
     ActivityApply addApply(Integer activityId,Integer employeeId,String remark) throws ApplyException;
 
     /**
-     * 删除预约
+     * 取消预约
      * @param id
      * @return
      */
-    boolean delteApply(Integer id);
+    boolean cancelApply(Integer id);
 
     /**
      * 获得申请
@@ -38,18 +38,5 @@ public interface ApplyService {
      * @return
      */
     PageInfo<ActivityApply> selectApply(ActivityApply record,int pageNum,int pageSize);
-
-    /**
-     * 获得申请所有活动申请人数
-     * @return
-     */
-    List<Map<String,Object>> selectApplyCount();
-
-    /**
-     * 获得活动申请人数
-     * @param activityId
-     * @return
-     */
-    Map<String,Object> selectApplyCount(Integer activityId);
 
 }

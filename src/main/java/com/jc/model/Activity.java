@@ -38,6 +38,12 @@ public class Activity {
     private String remark;
 
     /**
+     * 报名人数
+     */
+    @Column(name = "apply_num")
+    private Integer applyNum;
+
+    /**
      * 0 正常 1 关闭
      */
     private String status;
@@ -150,6 +156,24 @@ public class Activity {
      */
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    /**
+     * 获取报名人数
+     *
+     * @return apply_num - 报名人数
+     */
+    public Integer getApplyNum() {
+        return applyNum;
+    }
+
+    /**
+     * 设置报名人数
+     *
+     * @param applyNum 报名人数
+     */
+    public void setApplyNum(Integer applyNum) {
+        this.applyNum = applyNum;
     }
 
     /**

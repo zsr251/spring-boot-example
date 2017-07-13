@@ -14,9 +14,9 @@ spring:
         cache: false
 
 druid:
-    url: jdbc:mysql://192.168.36.10:3306/jc_apply?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&idleConnectionTestPeriod=120&preferredTestQuery=select now()&allowMultiQueries=true
-    username: jc_test
-    password: jc123456!
+    url: jdbc:mysql://127.0.0.1:3306/jc_apply?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&idleConnectionTestPeriod=120&preferredTestQuery=select now()&allowMultiQueries=true
+    username: root
+    password: root
     initial-size: 1
     min-idle: 1
     max-active: 20
