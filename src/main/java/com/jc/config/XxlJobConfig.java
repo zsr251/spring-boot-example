@@ -9,8 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 
-@Configuration
-@ComponentScan(basePackages = "com.jc.job")
+//@Configuration
+//@ComponentScan(basePackages = "com.jc.job")
 public class XxlJobConfig {
     private Logger logger = LoggerFactory.getLogger(XxlJobConfig.class);
 

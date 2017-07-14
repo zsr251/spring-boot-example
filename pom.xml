@@ -69,6 +69,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<!-- web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -207,13 +208,13 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<!-- 代码文件热部署 -->
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<fork>true</fork>
-				</configuration>
-			</plugin>
+			<!--<plugin>-->
+				<!--<groupId>org.springframework.boot</groupId>-->
+				<!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+				<!--<configuration>-->
+					<!--<fork>true</fork>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
 			<!-- mybatis生成插件 -->
 			<!-- 执行命令：mvn mybatis-generator:generate 生成文件-->
 			<plugin>

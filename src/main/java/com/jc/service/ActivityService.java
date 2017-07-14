@@ -1,5 +1,6 @@
 package com.jc.service;
 
+import com.github.pagehelper.PageInfo;
 import com.jc.model.Activity;
 
 import java.util.List;
@@ -41,4 +42,11 @@ public interface ActivityService {
      */
     List<Activity> getActivity(Activity record);
 
+    /**
+     * 获得活动
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageInfo<Activity> getActivity(int pageNum,int pageSize);
 }

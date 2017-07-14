@@ -32,6 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee record = getEmployee(englishName);
         if (record != null)
             throw new ApplyException(MessageFormat.format("英文名已存在 ID【{0}】部门【{1}】姓名【{2}】英文名【{3}】", record.getId(), record.getDepartment(), record.getRealName(), record.getEnglishName()));
+        record = new Employee();
         record.setDepartment(de.name());
         record.setRealName(realName);
         record.setEnglishName(englishName);

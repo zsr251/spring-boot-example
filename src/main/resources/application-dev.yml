@@ -1,40 +1,44 @@
 server:
     port: 8081
+    tomcat:
+      uri-encoding: UTF-8
 
 spring:
     http:
-        encoding.charset: UTF-8
-        encoding.enabled: true
-        encoding.force: true
+        encoding:
+            charset: UTF-8
+            enabled: true
+            force: true
+
     mvc:
         view:
             prefix: /templates/
             suffix: .html
     thymeleaf:
         cache: false
-
-druid:
-    url: jdbc:mysql://127.0.0.1:3306/jc_apply?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&idleConnectionTestPeriod=120&preferredTestQuery=select now()&allowMultiQueries=true
-    username: root
-    password: root
-    initial-size: 1
-    min-idle: 1
-    max-active: 20
-    # 配置获取连接等待超时的时间
-    maxWait: 60000
-    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    # 配置一个连接在池中最小生存的时间，单位是毫秒
-    validationQuery: SELECT 'x'
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    # 打开PSCache，并且指定每个连接上PSCache的大小
-    poolPreparedStatements: false
-    maxPoolPreparedStatementPerConnectionSize: 20
-    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-    filters: stat
+    datasource:
+        druid:
+            url: jdbc:mysql://127.0.0.1:3306/jc_apply?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&idleConnectionTestPeriod=120&preferredTestQuery=select now()&allowMultiQueries=true
+            username: root
+            password: root
+            initial-size: 1
+            min-idle: 1
+            max-active: 20
+            # 配置获取连接等待超时的时间
+            maxWait: 60000
+            # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+            timeBetweenEvictionRunsMillis: 60000
+            minEvictableIdleTimeMillis: 300000
+            # 配置一个连接在池中最小生存的时间，单位是毫秒
+            validationQuery: SELECT 'x'
+            testWhileIdle: true
+            testOnBorrow: false
+            testOnReturn: false
+            # 打开PSCache，并且指定每个连接上PSCache的大小
+            poolPreparedStatements: false
+            maxPoolPreparedStatementPerConnectionSize: 20
+            # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+            filters: stat
 
 mybatis:
     type-aliases-package: tk.mybatis.springboot.model

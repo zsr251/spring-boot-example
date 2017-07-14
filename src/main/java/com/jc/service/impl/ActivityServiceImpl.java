@@ -1,5 +1,7 @@
 package com.jc.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.jc.mapper.ActivityMapper;
@@ -31,6 +33,7 @@ public class ActivityServiceImpl implements ActivityService {
         Preconditions.checkNotNull(record.getApplyBeginTime(), "报名开始时间不呢为空");
         Preconditions.checkNotNull(record.getApplyEndTime(), "报名结束时间不呢为空");
         record.setStatus("0");
+        record.setApplyNum(0);
         record.setCreateTime(new Date());
         activityMapper.insertUseGeneratedKeys(record);
         return record;
@@ -73,5 +76,14 @@ public class ActivityServiceImpl implements ActivityService {
             return activities;
         }
         return activityMapper.select(record);
+    }
+
+    @Override
+    public PageInfo<Activity> getActivity(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        Example example = new Example(Activity.class);
+        example.orderBy("id desc");
+        List<Activity> list = activityMapper.selectByExample(example);
+        return new PageInfo<>(list);
     }
 }

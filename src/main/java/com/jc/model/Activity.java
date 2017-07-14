@@ -1,9 +1,13 @@
 package com.jc.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Activity {
+public class Activity implements Serializable {
+    private static final long serialVersionUID = 8737272002167661539L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,18 +22,21 @@ public class Activity {
      * 开始时间
      */
     @Column(name = "start_time")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     /**
      * 报名开始时间
      */
     @Column(name = "apply_begin_time")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date applyBeginTime;
 
     /**
      * 报名结束时间
      */
     @Column(name = "apply_end_time")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date applyEndTime;
 
     /**

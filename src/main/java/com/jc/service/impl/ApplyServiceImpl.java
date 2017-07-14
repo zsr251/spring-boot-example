@@ -72,18 +72,38 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
+    public boolean cancelApply(Integer activityId, Integer employeeId) {
+        Preconditions.checkNotNull(activityId,"活动ID不能为空");
+        Preconditions.checkNotNull(employeeId,"用户ID不能为空");
+        ActivityApply record = new ActivityApply();
+        record.setActivityId(activityId);
+        record.setEmployeeId(employeeId);
+        record.setStatus("0");
+        List<ActivityApply> list = getApply(record);
+        if (list==null||list.size()<1)
+            throw new ApplyException("未找到报名信息");
+        return cancelApply(list.get(0));
+    }
+
+    @Override
     public boolean cancelApply(Integer id) {
         Preconditions.checkNotNull(id, "ID不能为空");
         ActivityApply record = applyMapper.selectByPrimaryKey(id);
+        return cancelApply(record);
+    }
+
+    @Override
+    public boolean cancelApply(ActivityApply record){
         if (record == null)
             throw new ApplyException("未找到报名信息");
         if (activityMapper.addApplyNum(record.getActivityId(), -1) < 1) {
             throw new ApplyException("取消失败或已过报名时间");
         }
-        record.setId(id);
+        record.setId(record.getId());
         record.setStatus("1");
         record.setUpdateTime(new Date());
         return applyMapper.updateByPrimaryKeySelective(record) > 0;
+
     }
 
     @Override

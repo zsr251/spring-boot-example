@@ -21,11 +21,25 @@ public interface ApplyService {
 
     /**
      * 取消预约
+     * @param activityId
+     * @param employeeId
+     * @return
+     */
+    boolean cancelApply(Integer activityId,Integer employeeId);
+
+    /**
+     * 取消预约
      * @param id
      * @return
      */
     boolean cancelApply(Integer id);
 
+    /**
+     * 取消预约
+     * @param record
+     * @return
+     */
+    boolean cancelApply(ActivityApply record);
     /**
      * 获得申请
      * @param record
