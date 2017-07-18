@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: htmlhead" th:with="title='Hello'"></head>
+
+<body>
+<div th:replace="layout :: navbar">(navbar)</div>
+
+<div class="container">
+    <div class="starter-template">
+        <h1>简易报名系统</h1>
+        <p>The current time is <span th:text="${currentTime}">(time)</span></p>
+    </div>
+</div>
+
+<div th:include="layout :: footer" id="footer">(footer)</div>
+
+</body>
+</html>

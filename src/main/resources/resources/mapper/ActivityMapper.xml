@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.mapper.ActivityMapper">
+  <resultMap id="BaseResultMap" type="com.jc.model.Activity">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="apply_begin_time" jdbcType="TIMESTAMP" property="applyBeginTime" />
+    <result column="apply_end_time" jdbcType="TIMESTAMP" property="applyEndTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="apply_num" jdbcType="INTEGER" property="applyNum" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, activity_name, start_time, apply_begin_time, apply_end_time, remark, apply_num, 
+    status, create_time, update_time
+  </sql>
+<update id="addApplyNum" parameterType="com.jc.model.Activity">
+  update activity set  apply_num = apply_num + #{applyNum},update_time = now()
+  <![CDATA[ where id = #{id} and status = '0' and apply_begin_time < now() and apply_end_time > now() ]]>
+</update>
+</mapper>

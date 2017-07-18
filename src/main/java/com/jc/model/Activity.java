@@ -1,5 +1,6 @@
 package com.jc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -22,21 +23,20 @@ public class Activity implements Serializable {
      * 开始时间
      */
     @Column(name = "start_time")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
     private Date startTime;
 
     /**
      * 报名开始时间
      */
     @Column(name = "apply_begin_time")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date applyBeginTime;
 
     /**
      * 报名结束时间
      */
     @Column(name = "apply_end_time")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date applyEndTime;
 
     /**

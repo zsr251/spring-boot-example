@@ -57,6 +57,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployee(String englishName) {
+//        try {
+//            //服务降级测试
+//            Thread.sleep(1500);
+//        }catch (Exception e){}
         Preconditions.checkNotNull(englishName, "英文名不能为空");
         Employee record = new Employee();
         record.setEnglishName(englishName);

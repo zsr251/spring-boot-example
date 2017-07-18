@@ -25,7 +25,7 @@ public class ErrorController extends BaseController{
     @ExceptionHandler(value = ApplyException.class)
     @ResponseBody
     public ResultModel authException(ApplyException exception){
-        logger.error("业务验证异常",exception);
+        logger.warn("业务验证异常",exception);
         return buildErrorResponse(exception.getMessage());
     }
     /**

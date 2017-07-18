@@ -26,6 +26,7 @@ package com.jc.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -36,43 +37,33 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Configuration
 
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-    }
-    // Thymeleaf视图解析器
-    @Bean
-    public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine);
-        viewResolver.setCharacterEncoding("UTF-8");// 解决Thymeleaf中文乱码问题
-        return viewResolver;
-    }
-    // 模板引擎
-    @Bean
-    public SpringTemplateEngine templateEngine(TemplateResolver templateResolver) {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver);
-        return templateEngine;
-    }
-    // 模板解析器
-    @Bean
-    public TemplateResolver templateResolver() {
-        TemplateResolver templateResolver = new ServletContextTemplateResolver();
-        templateResolver.setPrefix("/WEB-INF/templates/");
-        templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML5");
-        templateResolver.setCacheable(false);// 修改html后不用重启动
-        templateResolver.setCharacterEncoding("UTF-8");// 解决Thymeleaf中文乱码问题
-        return templateResolver;
-    }
-    // 配置静态资源的处理
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
+    @Bean
+    public Converter<String, Date> addNewConvert() {
+        return new Converter<String, Date>() {
+            @Override
+            public Date convert(String source) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm");
+                Date date = null;
+                try {
+                    date = sdf.parse((String) source);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return date;
+            }
+        };
+    }
 }
