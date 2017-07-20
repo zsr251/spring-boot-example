@@ -1,9 +1,14 @@
 package com.jc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Activity {
+public class Activity implements Serializable {
+    private static final long serialVersionUID = 8737272002167661539L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,6 +23,8 @@ public class Activity {
      * 开始时间
      */
     @Column(name = "start_time")
+//    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+//    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
     private Date startTime;
 
     /**

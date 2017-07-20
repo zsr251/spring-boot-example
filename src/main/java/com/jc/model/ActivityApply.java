@@ -1,10 +1,14 @@
 package com.jc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "activity_apply")
-public class ActivityApply {
+public class ActivityApply implements Serializable{
+    private static final long serialVersionUID = 8731165141504751963L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

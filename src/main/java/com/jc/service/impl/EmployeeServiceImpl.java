@@ -32,6 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee record = getEmployee(englishName);
         if (record != null)
             throw new ApplyException(MessageFormat.format("英文名已存在 ID【{0}】部门【{1}】姓名【{2}】英文名【{3}】", record.getId(), record.getDepartment(), record.getRealName(), record.getEnglishName()));
+        record = new Employee();
         record.setDepartment(de.name());
         record.setRealName(realName);
         record.setEnglishName(englishName);
@@ -56,6 +57,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployee(String englishName) {
+//        try {
+//            //服务降级测试
+//            Thread.sleep(1500);
+//        }catch (Exception e){}
         Preconditions.checkNotNull(englishName, "英文名不能为空");
         Employee record = new Employee();
         record.setEnglishName(englishName);

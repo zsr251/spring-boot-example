@@ -1,9 +1,13 @@
 package com.jc.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Employee {
+public class Employee implements Serializable {
+    private static final long serialVersionUID = 3527226708185200710L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -14,7 +14,7 @@ public enum DepartmentEnum {
     总经办,
     品宣部;
 
-    public DepartmentEnum match(String name){
+    public static DepartmentEnum match(String name){
         for (DepartmentEnum departmentEnum : DepartmentEnum.values()) {
             if (departmentEnum.name().equals(name))
                 return departmentEnum;

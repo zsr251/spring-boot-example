@@ -24,15 +24,46 @@
 
 package com.jc.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
+    @Bean
+    public Converter<String, Date> addNewConvert() {
+        return new Converter<String, Date>() {
+            @Override
+            public Date convert(String source) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:ss:mm");
+                Date date = null;
+                try {
+                    date = sdf.parse((String) source);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                return date;
+            }
+        };
     }
 }
