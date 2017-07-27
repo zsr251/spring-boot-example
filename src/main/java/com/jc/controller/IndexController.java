@@ -175,4 +175,10 @@ public class IndexController extends BaseController {
         return buildSuccessResponse(result);
     }
 
+    @ApiOperation(value = "登录页")
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String login(Model model){
+        model.addAttribute("currentTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
+        return "login";
+    }
 }

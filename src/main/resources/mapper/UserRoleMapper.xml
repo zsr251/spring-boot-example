@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jc.security.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.jc.security.model.UserRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, user_id, role_id
+  </sql>
+  <select id="findRoleByUserId" parameterType="integer" resultType="com.jc.security.model.Role">
+    select DISTINCT R.id,R.name from user_role ur left join role R on ur.`role_id` = R.id where ur.`user_id` = #{0}
+  </select>
+</mapper>

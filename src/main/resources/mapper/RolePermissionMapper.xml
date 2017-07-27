@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jc.security.mapper.RolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.jc.security.model.RolePermission" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="permission_id" property="permissionId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, role_id, permission_id
+  </sql>
+  <select id="findPermissionByUserId" resultType="com.jc.security.model.Permission">
+    select DISTINCT P.id,P.name,P.description,P.url,P.pid from user_role ur
+    left join role R on ur.role_id = R.id
+    left join role_permission rp on R.id = rp.role_id
+    left join permission P on rp.permission_id = P.id
+    where ur.user_id = #{0}
+  </select>
+</mapper>

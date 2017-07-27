@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.jc.mapper")
+@MapperScan(basePackages = {"com.jc.mapper","com.jc.security.mapper"})
 public class JcApplyApplication {
 
 	public static void main(String[] args) {
