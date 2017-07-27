@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: htmlhead" th:with="title='Hello'"></head>
+
+<body>
+<div th:replace="layout :: navbar">(navbar)</div>
+
+<div class="container">
+  <form id="login" method="post" action="/login">
+      用户名:<br>
+      <input type="text"  name="username" value="jasonzhu">
+      <br>
+      密码:<br>
+      <input type="text" name="password" value="jasonzhu">
+      <br><br>
+      <input type="submit" value="登录">
+  </form>
+</div>
+
+<div th:include="layout :: footer" id="footer">(footer)</div>
+
+</body>
+</html>

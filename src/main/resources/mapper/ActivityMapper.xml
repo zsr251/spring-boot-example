@@ -23,8 +23,8 @@
     id, activity_name, start_time, apply_begin_time, apply_end_time, remark, apply_num, 
     status, create_time, update_time
   </sql>
-<update id="addApplyNum" >
-  update activity set  apply_num = apply_num + #{1},update_time = now
-  <![CDATA[ where id = #{0} and status = '0' and apply_begin_time < now() and apply_end_time > now() ]]>
+<update id="addApplyNum" parameterType="com.jc.model.Activity">
+  update activity set  apply_num = apply_num + #{applyNum},update_time = now()
+  <![CDATA[ where id = #{id} and status = '0' and apply_begin_time < now() and apply_end_time > now() ]]>
 </update>
 </mapper>
