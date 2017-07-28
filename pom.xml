@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>jc_apply</name>
-	<description>内部报名系统</description>
+	<description>spring boot完整例子</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -118,6 +118,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<!-- 缓存 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<!-- ehcache -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
 		</dependency>
 		<!-- json -->
 		<dependency>

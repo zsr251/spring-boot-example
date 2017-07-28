@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache name="spring_boot_auto_ehcache">
+    <diskStore path="java.io.tmpdir"/>
+
+    <cache name="demoCache"
+           maxElementsInMemory="10000"
+           maxEntriesLocalHeap="10000"
+           maxEntriesLocalDisk="1000"
+           eternal="false"
+           overflowToDisk="true"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU" />
+</ehcache>

@@ -16,7 +16,7 @@
     id, role_id, permission_id
   </sql>
   <select id="findPermissionByUserId" resultType="com.jc.security.model.Permission">
-    select DISTINCT P.id,P.name,P.description,P.url,P.pid from user_role ur
+    select DISTINCT P.id,P.name,P.description,P.url,P.method from user_role ur
     left join role R on ur.role_id = R.id
     left join role_permission rp on R.id = rp.role_id
     left join permission P on rp.permission_id = P.id

@@ -92,6 +92,17 @@ public class IndexController extends BaseController {
     }
 
     /**
+     * 刷新缓存
+     * @return
+     */
+    @RequestMapping(value = "refresh", method = RequestMethod.GET)
+    @ResponseBody
+    public String refresh() {
+        activityService.updateCanApplyActivityCache();
+        return "ok";
+    }
+
+    /**
      * 预约
      *
      * @param englishName 英文名
@@ -176,8 +187,8 @@ public class IndexController extends BaseController {
     }
 
     @ApiOperation(value = "登录页")
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String login(Model model){
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model) {
         model.addAttribute("currentTime", DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
         return "login";
     }

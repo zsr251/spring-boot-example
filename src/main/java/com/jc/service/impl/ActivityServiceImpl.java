@@ -11,6 +11,8 @@ import com.jc.service.ActivityService;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -64,6 +66,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    @CacheEvict(value = "demoCache",key = "#record.id",condition = "#record.id != null")
     public boolean updateActivity(Activity record) {
         Preconditions.checkNotNull(record, "参数不能为空");
         Preconditions.checkNotNull(record.getId(), "活动ID不能为空");
@@ -71,6 +74,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    @Cacheable(value = "demoCache")
     public List<Activity> getCanApplyActivity() {
         Date now = new Date();
         Example example = new Example(Activity.class);
@@ -79,6 +83,13 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    @CacheEvict(value = "demoCache")
+    public boolean updateCanApplyActivityCache() {
+        return true;
+    }
+
+    @Override
+    @Cacheable(value = "demoCache",key = "#record.id",condition = "#record.id != null")
     public List<Activity> getActivity(Activity record) {
         Preconditions.checkNotNull(record, "参数不能为空");
         List<Activity> activities = Lists.newArrayList();

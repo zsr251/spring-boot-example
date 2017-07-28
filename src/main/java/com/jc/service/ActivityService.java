@@ -36,6 +36,11 @@ public interface ActivityService {
     List<Activity> getCanApplyActivity();
 
     /**
+     * 刷新可预约活动缓存
+     * @return
+     */
+    boolean updateCanApplyActivityCache();
+    /**
      * 获得活动
      * @param record
      * @return
