@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.jc.aop.TimeStatistics;
 import com.jc.exception.ApplyException;
 import com.jc.mapper.ActivityMapper;
 import com.jc.model.Activity;
@@ -54,6 +55,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
+    @TimeStatistics(name = "新增加班餐活动")
     public Activity addDefaultOvertimeMeals() {
         Activity record = new Activity();
         record.setActivityName("加班餐（晚餐）");
@@ -74,7 +76,8 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    @Cacheable(value = "demoCache")
+    @Cacheable(value = "demoCache",key = "new String('canApplyActivity')")
+    @TimeStatistics(name = "获得可报名活动")
     public List<Activity> getCanApplyActivity() {
         Date now = new Date();
         Example example = new Example(Activity.class);
@@ -83,7 +86,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    @CacheEvict(value = "demoCache")
+    @CacheEvict(value = "demoCache",key = "new String('canApplyActivity')")
     public boolean updateCanApplyActivityCache() {
         return true;
     }

@@ -53,6 +53,28 @@ public class ActivityApply implements Serializable{
     @Column(name = "update_time")
     private Date updateTime;
 
+    @Transient
+    private String department;
+
+    @Transient
+    private String englishName;
+
+    public String getEnglishName() {
+        return englishName;
+    }
+
+    public void setEnglishName(String englishName) {
+        this.englishName = englishName;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
     /**
      * @return id
      */

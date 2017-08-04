@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.jc.aop.TimeStatistics;
 import com.jc.exception.ApplyException;
 import com.jc.mapper.ActivityApplyMapper;
 import com.jc.mapper.ActivityMapper;
@@ -16,6 +17,7 @@ import io.swagger.models.auth.In;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -40,6 +42,8 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    @CacheEvict(value = "demoCache",key = "new String('canApplyActivity')")
+    @TimeStatistics(name = "报名")
     public ActivityApply addApply(Integer activityId, Integer employeeId, String remark) throws ApplyException {
         Preconditions.checkNotNull(activityId, "活动ID不能为空");
         Preconditions.checkNotNull(employeeId, "员工ID不能为空");
@@ -78,6 +82,8 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
+    @CacheEvict(value = "demoCache",key = "new String('canApplyActivity')")
+    @TimeStatistics(name = "取消报名")
     public boolean cancelApply(Integer activityId, Integer employeeId) {
         Preconditions.checkNotNull(activityId, "活动ID不能为空");
         Preconditions.checkNotNull(employeeId, "用户ID不能为空");
@@ -128,6 +134,13 @@ public class ApplyServiceImpl implements ApplyService {
                 return Lists.newArrayList(record);
         }
         return applyMapper.select(record);
+    }
+
+    @Override
+    public List<ActivityApply> getApplyList(Integer activityId){
+        Preconditions.checkNotNull(activityId, "参数不能为空");
+        List<ActivityApply> list = applyMapper.getApplyList(activityId);
+        return list==null?Lists.newArrayList():list;
     }
 
     @Override

@@ -46,6 +46,8 @@ public interface ApplyService {
      * @return
      */
     List<ActivityApply> getApply(ActivityApply record);
+
+    List<ActivityApply> getApplyList(Integer activityId);
     /**
      * 分页获得申请
      * @param record

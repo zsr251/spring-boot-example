@@ -5,7 +5,7 @@ package com.jc.constant;
  * Created by jasonzhu on 2017/7/13.
  */
 public enum DepartmentEnum {
-    未知,
+    其他,
     金融部,
     技术部,
     市场运营部,
@@ -19,6 +19,6 @@ public enum DepartmentEnum {
             if (departmentEnum.name().equals(name))
                 return departmentEnum;
         }
-        return DepartmentEnum.未知;
+        return DepartmentEnum.其他;
     }
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: htmlhead" th:with="title='查询'"></head>
+
+<body>
+<div th:replace="layout :: navbar-admin" >(navbar)</div>
+
+<div class="container-fluid">
+    <div class="starter-template">
+        <h1>简易报名系统报名查询</h1>
+        <p>The current time is <span th:text="${currentTime}">(time)</span></p>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>活动名</th>
+            <th>部门</th>
+            <th>姓名</th>
+            <th>英文名</th>
+            <th>报名时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="activityApply : ${list}" >
+            <td data-th-text="${activityApply.activityName}">...</td>
+            <td data-th-text="${activityApply.department}">...</td>
+            <td data-th-text="${activityApply.realName}">...</td>
+            <td data-th-text="${activityApply.englishName}">...</td>
+            <td data-th-text="${#dates.format(activityApply.createTime,'yyyy-MM-dd HH:mm:ss')}">...</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:include="layout :: footer" id="footer">(footer)</div>
+<script>
+    function goApplyList(id) {
+        alert(id);
+    }
+    $("#addDefaultOvertimeMeals").click(function () {
+        $.post("/admin/addDefaultOvertimeMeals",
+                {}, function (data, status) {
+                    if (data.c == '100'){
+                        alert("生成当天加班餐成功");
+                    }else{
+                        alert(data.m);
+                    }
+                });
+    });
+</script>
+</body>
+</html>

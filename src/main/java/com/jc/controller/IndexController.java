@@ -69,9 +69,9 @@ public class IndexController extends BaseController {
     private EmployeeService employeeService;
     private Logger logger = LoggerFactory.getLogger(IndexController.class);
     //每秒五条请求 等待1秒
-//    private RateLimitUtil rateLimitUtil = new RateLimitUtil(5, 1);
-    @Resource(name = "applyRateLimitUtil")
-    private RateLimitUtil rateLimitUtil;
+    private RateLimitUtil rateLimitUtil = new RateLimitUtil(5, 1);
+//    @Resource(name = "applyRateLimitUtil")
+//    private RateLimitUtil rateLimitUtil;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model, Integer id) {
@@ -123,6 +123,7 @@ public class IndexController extends BaseController {
         } catch (Exception e) {
             return buildLimitResponse();
         }
+        englishName = englishName.trim();
         GetEmployeeCommand getEmployeeCommand = new GetEmployeeCommand(employeeService::getEmployee, englishName);
         Future<Employee> getEmployeeFuture = getEmployeeCommand.queue();
         logger.debug("查询用户【{}】是否存在", englishName);
@@ -149,6 +150,7 @@ public class IndexController extends BaseController {
     @RequestMapping(value = "/cancelApply", method = RequestMethod.POST)
     @ResponseBody
     public ResultModel cancelApply(@RequestParam String englishName, @RequestParam Integer activityId) {
+        englishName = englishName.trim();
         Employee employee = employeeService.getEmployee(englishName);
         if (employee == null) return buildErrorResponse("请先注册");
         if (applyService.cancelApply(activityId, employee.getId())) {

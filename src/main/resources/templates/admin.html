@@ -1,17 +1,62 @@
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:include="layout :: htmlhead" th:with="title='Hello'"></head>
+<head th:include="layout :: htmlhead" th:with="title='管理'"></head>
 
 <body>
-<div th:replace="layout :: navbar">(navbar)</div>
+<div th:replace="layout :: navbar-admin" >(navbar)</div>
 
-<div class="container">
+<div class="container-fluid">
     <div class="starter-template">
         <h1>简易报名系统后台</h1>
         <p>The current time is <span th:text="${currentTime}">(time)</span></p>
+        <button type="button" class="btn btn-default" id="addDefaultOvertimeMeals">生成当天加班餐</button>
     </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>活动名</th>
+            <th>活动开始时间</th>
+            <th>报名开始时间</th>
+            <th>报名结束时间</th>
+            <th>活动状态</th>
+            <th>报名人数</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="activity : ${page.list}" th:onclick="'javascript:goApplyList('+${activity.id}+')'">
+            <td data-th-text="${activity.activityName}">...</td>
+            <td data-th-text="${#dates.format(activity.startTime,'yyyy-MM-dd HH:mm:ss')}">...</td>
+            <td data-th-text="${#dates.format(activity.applyBeginTime,'yyyy-MM-dd HH:mm:ss')}">...</td>
+            <td data-th-text="${#dates.format(activity.applyEndTime,'yyyy-MM-dd HH:mm:ss')}">...</td>
+            <td data-th-text="${activity.status}">...</td>
+            <td data-th-text="${activity.applyNum}">...</td>
+        </tr>
+        </tbody>
+    </table>
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous"><a th:href="'/admin/index?pageNum='+${page.prePage}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li class="next"><a th:href="'/admin/index?pageNum='+${page.nextPage}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
 </div>
 
 <div th:include="layout :: footer" id="footer">(footer)</div>
-
+<script>
+    function goApplyList(id) {
+        window.open('/admin/applyList?activityId='+id);
+    }
+    $("#addDefaultOvertimeMeals").click(function () {
+        $.post("/admin/addDefaultOvertimeMeals",
+                {}, function (data, status) {
+                    if (data.c == '100'){
+                        alert("生成当天加班餐成功");
+                    }else{
+                        alert(data.m);
+                    }
+                });
+    });
+</script>
 </body>
 </html>

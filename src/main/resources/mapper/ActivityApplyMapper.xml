@@ -22,4 +22,10 @@
     id, activity_id, employee_id, activity_name, real_name, remark, status, create_time, 
     update_time
   </sql>
+  <select id="getApplyList" resultType="com.jc.model.ActivityApply">
+    select e.department,e.english_name englishName,aa.id, aa.activity_id activityId, aa.employee_id employeeId, aa.activity_name activityName, aa.real_name realName, aa.remark, aa.status, aa.create_time createTime
+    from activity_apply aa
+    left join employee e on aa.employee_id = e.id
+    where status = '0' and aa.activity_id = #{0}
+  </select>
 </mapper>

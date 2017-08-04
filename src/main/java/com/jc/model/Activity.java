@@ -61,6 +61,17 @@ public class Activity implements Serializable {
     @Column(name = "update_time")
     private Date updateTime;
 
+    @Transient
+    private String other;
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
     /**
      * @return id
      */

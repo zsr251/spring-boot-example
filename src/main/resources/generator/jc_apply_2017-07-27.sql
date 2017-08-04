@@ -124,7 +124,8 @@ LOCK TABLES `permission` WRITE;
 
 INSERT INTO `permission` (`id`, `name`, `description`, `url`, `method`)
 VALUES
-	(1,'P_A','测试','/index','ALL');
+	(1,'P_A','测试','/test','ALL'),
+	(2,'ROLE_ADMIN','管理','/admin/index','ALL');
 
 /*!40000 ALTER TABLE `permission` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -170,7 +171,8 @@ LOCK TABLES `role_permission` WRITE;
 
 INSERT INTO `role_permission` (`id`, `role_id`, `permission_id`)
 VALUES
-	(2,1,1);
+	(1,1,1),
+	(2,1,2);
 
 /*!40000 ALTER TABLE `role_permission` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -193,7 +195,8 @@ LOCK TABLES `user` WRITE;
 
 INSERT INTO `user` (`id`, `username`, `password`)
 VALUES
-	(1,'jasonzhu','$2a$10$lsdNtJi36afQ87NfaN2fvuk25s35.HzSdItDSGD11x7tb7mTwbLGO');
+	(1,'jasonzhu','$2a$10$lsdNtJi36afQ87NfaN2fvuk25s35.HzSdItDSGD11x7tb7mTwbLGO'),
+	(2,'admin','$2a$10$BRp7lCwoSZzV7K4httDRvOwHxuJvOSbHqZwSk17nf0pnVV/xtTJZa');
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -217,7 +220,9 @@ LOCK TABLES `user_role` WRITE;
 INSERT INTO `user_role` (`id`, `user_id`, `role_id`)
 VALUES
 	(1,1,1),
-	(2,1,2);
+	(2,1,2),
+	(3,2,1),
+	(4,2,2);
 
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
