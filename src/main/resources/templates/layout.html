@@ -24,13 +24,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/index">报名系统</a>
+          <a class="navbar-brand" th:href="@{/index}">报名系统</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="javascript:">首页</a></li>
             <li><a href="javascript:" data-toggle="modal" data-target="#registerModal">注册</a></li>
-            <li><a href="/admin/index">管理</a></li>
+            <li><a th:href="@{/admin/index}">管理</a></li>
             <li><a href="javascript:alert('你猜怎么着！？我没写关于！')">关于</a></li>
           </ul>
         </div>
@@ -45,7 +45,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/index">报名系统</a>
+          <a class="navbar-brand" th:href="@{/index}">报名系统</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -141,7 +141,8 @@
       </div>
       <script th:src="@{/webjarslocator/jquery/jquery.min.js}"></script>
       <script th:src="@{/webjarslocator/bootstrap/js/bootstrap.min.js}"></script>
-      <script>
+      <script th:inline="javascript">
+        var basePath = /*[[@{/}]]*/ '';
         $("#addEmployee").click(function () {
           var regRealName = $("#regRealName").val();
           var regEnglishName = $("#regEnglishName").val();
@@ -154,7 +155,7 @@
             return;
           }
           var regDepartment =  $("#regDepartment").val();
-          $.post("/addEmployee",
+          $.post(basePath + "addEmployee",
                   {
                     department:regDepartment,
                     englishName: regEnglishName,
@@ -189,7 +190,7 @@
             return;
           }
           var remarkA = $("#remarkA").val();
-          $.post("/admin/addActivity",
+          $.post(basePath + "admin/addActivity",
                   {
                     activityName:activityNameA,
                     startTime: startTimeA,

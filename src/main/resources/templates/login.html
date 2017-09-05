@@ -5,7 +5,7 @@
 <div th:replace="layout :: navbar">(navbar)</div>
 
 <div class="container">
-  <form id="login" method="post" action="/login">
+  <form id="login" method="post" th:action="@{/login}">
       用户名:<br>
       <input type="text"  name="username" value="">
       <br>
